@@ -16,7 +16,6 @@ from robot.api import logger
 from robot.api.deco import keyword
 from robot.utils import asserts
 import dns.resolver
-import string
 import re
 
 ATTRS = {
@@ -134,7 +133,6 @@ class DNSLibrary(object):
             raise Exception("Expected " + str(n_answers) +
                             " answers, but received (" + len(self.answers) + ")")
 
-                            
     def answer_is(self, ans_number=0, **kwargs):
         '''
             Assert that the received answer is equal to parameters specified
@@ -148,7 +146,6 @@ class DNSLibrary(object):
         '''
         self.__answer_is(False, ans_number, **kwargs)
 
-        
     def answer_is_regex(self, ans_number=0, **kwargs):
         '''
             Assert that the received answer matches to parameters specified regex
@@ -162,7 +159,6 @@ class DNSLibrary(object):
         '''
         self.__answer_is(True, ans_number, **kwargs)
 
-        
     def __answer_is(self, use_regex, ans_number, **kwargs):
         
         answer = self.answers[ans_number]
@@ -202,7 +198,5 @@ class DNSLibrary(object):
 
         if len(errors) > 0:
             raise Exception(
-                "Found those errors:\n\t" +
-                string.join(
-                    errors,
-                    '\n\t'))
+                "Found these errors:\n\t" +
+                '\n\t'.join(errors))
